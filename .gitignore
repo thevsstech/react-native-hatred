@@ -28,6 +28,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+yarn.lock
+example/yarn.lock
+example/ios/Podfile.lock
 
 # Android/IJ
 #
