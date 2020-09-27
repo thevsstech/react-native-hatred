@@ -40,6 +40,10 @@
   "bugs": {
     "url": "https://thevss.tech/issues"
   },
+  "dependencies": {
+    "@shopify/restyle": "^1.1.0",
+    "color": "^3.1.2"
+  },
   "homepage": "https://thevss.tech#readme",
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -63,8 +67,14 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
+    "@react-native-community/datetimepicker": "*",
+    "@react-native-community/masked-view": "*",
+    "moment": "*",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-linear-gradient": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-vector-icons": "*"
   },
   "jest": {
     "preset": "react-native",
@@ -119,7 +129,10 @@
       ]
     }
   },
-  "eslintIgnore": ["node_modules/", "lib/"],
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
@@ -130,6 +143,10 @@
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
-    "targets": ["commonjs", "module", "typescript"]
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
   }
 }

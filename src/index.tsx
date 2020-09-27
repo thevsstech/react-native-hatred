@@ -1,5 +1,4 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+export * from './components/Gradient';
+export * from './components/Button';
+export * from './components/Avatar/Avatar';
+export * from './components/Image';

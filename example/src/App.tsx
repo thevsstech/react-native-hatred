@@ -1,25 +1,40 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import Hatred from 'react-native-hatred';
+import ThemeProvider from '../../src/components/ThemeProvider';
+import { useCallback } from 'react';
+import Box from '../../src/components/Box';
+import Select from '../../src/components/Select';
+import type { SelectItemType } from '../../src/components';
+import Icon from '../../src/components/Icon/Icon';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    Hatred.multiply(3, 7).then(setResult);
+  let items = [
+    {
+      label: 'test',
+      value: 'Test',
+      leftIcon: <Icon size={20} name={'check'} color={'text'} />,
+    },
+    {
+      label: 'ss',
+      value: 'aa',
+      leftIcon: <Icon size={20} name={'account'} color={'text'} />,
+    },
+    { label: 'aa', value: 'dd' },
+  ] as SelectItemType[];
+  let value = 'Test';
+  const onSelect = useCallback((value) => {
+    console.log(value);
   }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <ThemeProvider isRtl={false}>
+      <Box margin={'xxxl'}>
+        <Select items={items} value={value} onSelect={onSelect}>
+          <Select.Placeholder>Teest</Select.Placeholder>
+
+          <Select.Right>
+            <Icon size={24} name={'person'} color={'text'} />
+          </Select.Right>
+        </Select>
+      </Box>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
