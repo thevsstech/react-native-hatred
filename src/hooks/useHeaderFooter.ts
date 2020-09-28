@@ -13,7 +13,7 @@ export default function useHeaderFooter(
       Footer: findChildByComponent(children, FooterComponent),
       Empty: EmptyComponent
         ? findChildByComponent(children, EmptyComponent)
-        : null,
+        : undefined,
     }),
     [children, HeaderComponent, FooterComponent]
   );

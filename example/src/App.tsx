@@ -1,39 +1,22 @@
 import * as React from 'react';
 import ThemeProvider from '../../src/components/ThemeProvider';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Box from '../../src/components/Box';
-import Select from '../../src/components/Select';
-import type { SelectItemType } from '../../src/components';
-import Icon from '../../src/components/Icon/Icon';
+
+import Input from '../../src/components/Input/Input';
 
 export default function App() {
-  let items = [
-    {
-      label: 'test',
-      value: 'Test',
-      leftIcon: <Icon size={20} name={'check'} color={'text'} />,
-    },
-    {
-      label: 'ss',
-      value: 'aa',
-      leftIcon: <Icon size={20} name={'account'} color={'text'} />,
-    },
-    { label: 'aa', value: 'dd' },
-  ] as SelectItemType[];
-  let value = 'Test';
-  const onSelect = useCallback((value) => {
-    console.log(value);
+  let [value, setValue] = useState('');
+  const onChange = useCallback((value) => {
+    setValue(value);
   }, []);
   return (
     <ThemeProvider isRtl={false}>
       <Box margin={'xxxl'}>
-        <Select items={items} value={value} onSelect={onSelect}>
-          <Select.Placeholder>Teest</Select.Placeholder>
-
-          <Select.Right>
-            <Icon size={24} name={'person'} color={'text'} />
-          </Select.Right>
-        </Select>
+        <Input error={'Test'} onChangeText={onChange} value={value}>
+          <Input.Label>Test</Input.Label>
+          <Input.HelperText>{({ error }) => error || 'Test'}</Input.HelperText>
+        </Input>
       </Box>
     </ThemeProvider>
   );

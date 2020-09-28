@@ -2,15 +2,29 @@ import Card from '../Card/Card';
 import Text from '../Typography/Text';
 import React from 'react';
 import type { DropdownItemType, OnDropdownSelect } from './Dropdown';
-import ContentIcon from '../Icon/ContentIcon';
+import ContentIcon, { IconType } from '../Icon/ContentIcon';
+import useRtl from '../../hooks/useRtl';
 
 type Props = {
   item: DropdownItemType;
   onSelect: OnDropdownSelect;
   width: number;
+  selected: boolean;
+  selectedIcon: IconType | null;
 };
 
-export default function DropdownItem({ item, onSelect, width }: Props) {
+export default function DropdownItem({
+  item,
+  onSelect,
+  width,
+  selected,
+  selectedIcon,
+}: Props) {
+  let { left, right } = useRtl(
+    item.leftIcon,
+    selected ? selectedIcon : item.rightIcon
+  );
+
   return (
     <Card
       minWidth={width}
@@ -21,9 +35,9 @@ export default function DropdownItem({ item, onSelect, width }: Props) {
       justifyContent={'space-between'}
       alignItems={'center'}
     >
-      <ContentIcon>{item.leftIcon}</ContentIcon>
+      {left}
       <Text color={'text'}>{item.label}</Text>
-      <ContentIcon>{item.rightIcon}</ContentIcon>
+      {right}
     </Card>
   );
 }

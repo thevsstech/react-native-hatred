@@ -36,13 +36,11 @@ export type TextProps = ShopifyTextProps<Theme> &
     weight?: keyof Fonts;
   };
 
-console.log(functions);
-
 const BaseText = createText<Theme>();
 
 const Text = ({ alpha, weight, ...rest }: TextProps) => {
   const props = useRestyle(functions, rest) as {
-    style: TextStyle;
+    style: TextStyle[];
   };
 
   let theme = useTheme<Theme>();
@@ -51,18 +49,16 @@ const Text = ({ alpha, weight, ...rest }: TextProps) => {
     // @ts-ignore
     let font = weight ? theme.typography.primary[weight] : {};
 
-    return {
-      color: colored(props.style.color).alpha(alpha).rgb().string(),
+    let style = {
       writingDirection: theme.settings.isRtl ? 'rtl' : 'ltr',
       ...font,
-    };
-  }, [
-    theme.settings.isRtl,
-    props.style.color,
-    alpha,
-    weight,
-    theme.typography,
-  ]);
+    } as TextStyle;
+
+    if (props.style[0]?.color && alpha) {
+      style.color = colored(props.style[0].color).alpha(alpha).rgb().string();
+    }
+    return style;
+  }, [theme.settings.isRtl, props.style, alpha, weight, theme.typography]);
 
   return <BaseText {...props} style={[props.style, additionalStyle]} />;
 };

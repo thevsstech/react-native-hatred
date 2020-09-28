@@ -20,8 +20,6 @@ export function findChildByDisplayName(
   }
 
   return children.find((item) => {
-    console.log('child', item);
-
     return item.type.displayName === displayName;
   });
 }

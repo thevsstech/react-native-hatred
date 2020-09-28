@@ -1,11 +1,9 @@
-import React from 'react';
-
 const SelectSelectedIcon = ({
   children,
 }: {
   children: JSX.Element | JSX.Element[];
 }) => {
-  return <>{children}</>;
+  return children;
 };
 
 SelectSelectedIcon.displayName = 'Select.SelectedIcon';

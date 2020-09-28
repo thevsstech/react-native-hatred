@@ -9,7 +9,7 @@ import Text from '../Typography/Text';
 import BaseGradient, { BaseGradientProps } from './BaseGradient';
 import type { BaseButtonProps } from '../Button/BaseButton';
 import Icon, { ThemeIconProps } from '../ThemeIcon';
-import { Theme } from '../../theme';
+import type { Theme } from '../../theme';
 import Box from '../Box';
 
 type Props = BaseGradientProps & {

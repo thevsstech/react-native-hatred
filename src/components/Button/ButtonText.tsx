@@ -1,26 +1,26 @@
 import type { TextProps } from '../Typography';
-import Placeholder from '../Typography/Placeholder';
 import React from 'react';
-import type { DropdownPlaceholderCallback } from './Dropdown';
+import Text from '../Typography/Text';
+import type { ButtonTextCallbackParams } from 'react-native-hatred';
 
 type Props = TextProps & {
-  children: string | JSX.Element | DropdownPlaceholderCallback;
+  children: string | JSX.Element | ButtonTextCallbackParams;
 };
 
 /*
    Example usage formats
 
    // with a static string
-   <Dropdown.Placeholder>
+   <Button.Text>
      put your static placeholder here
-   </Dropdown.Placeholder>
+   </Button.Text>
 
    // a custom JSX element
-    <Dropdown.Placeholder>
+    <Button.Text>
       <View>
           <Text>your label</Text>
       </>
-    </Dropdown.Placeholder>
+    </Button.Text>
 
 
    // with a  function
@@ -28,20 +28,20 @@ type Props = TextProps & {
    // { selected: {label, value} }
    // also if you have enabled multiple options selected option will be an array
 
-   <Dropdown.Placeholder>
+   <Button.Text>
     {({selected: {label}}) => <View>
         <Text>{label}
    </View> }
-   </Dropdown.Placeholder>
+   </Button.Text>
   */
-export default function DropdownPlaceholder({ children, ...rest }: Props) {
+export default function ButtonText({ children, ...rest }: Props) {
   // if we have a string content, return a Placeholder
 
   if (typeof children === 'string') {
-    return <Placeholder {...rest}>{children}</Placeholder>;
+    return <Text {...rest}>{children}</Text>;
   }
 
   return children;
 }
 
-DropdownPlaceholder.displayName = 'Dropdown.Placeholder';
+ButtonText.displayName = 'Button.Text';

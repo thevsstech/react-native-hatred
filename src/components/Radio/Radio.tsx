@@ -1,23 +1,20 @@
-import React from 'react';
-import Text from './Typography/Text';
-import { TextProps, useTheme } from '@shopify/restyle';
-import type { Theme } from '../theme';
-import Box from './Box';
-import Icon from './Icon/Icon';
+import React, { useMemo } from 'react';
+import { useTheme } from '@shopify/restyle';
+import type { Theme } from '../../theme';
+import Box from '../Box';
+import Icon from '../Icon/Icon';
 import { TouchableOpacity, ViewProps, ViewStyle } from 'react-native';
-import HelperText from './HelperText';
+import usePlaceholder from '../../hooks/usePlaceholder';
+import RadioLabel from './RadioLabel';
 
 type Props = ViewProps & {
-  labelProps?: TextProps<Theme>;
-  label?: string;
   activeColor?: string;
   deactiveColor?: string;
   onPress: () => void;
   checked: boolean;
   size?: number;
-  error?: string;
-  helperText?: string;
   activeIcon?: string;
+  children?: JSX.Element | JSX.Element[];
 };
 
 const Radio = ({
@@ -26,11 +23,8 @@ const Radio = ({
   deactiveColor,
   onPress,
   size = 24,
-  label,
-  labelProps,
   activeIcon = 'check',
-  helperText,
-  error,
+  children,
   ...rest
 }: Props) => {
   const theme = useTheme<Theme>();
@@ -62,6 +56,15 @@ const Radio = ({
     borderColor: theme.colors.border,
   } as ViewStyle;
 
+  const passObject = useMemo(
+    () => ({
+      checked,
+    }),
+    [checked]
+  );
+
+  let label = usePlaceholder(children || [], RadioLabel, passObject);
+
   return (
     <>
       <Box flexDirection={'row'} alignItems={'center'}>
@@ -73,14 +76,8 @@ const Radio = ({
           {checked ? <Icon name={activeIcon} color={'#fff'} size={11} /> : null}
         </TouchableOpacity>
 
-        {label ? (
-          <Text onPress={onPress} marginLeft={'xs'} {...labelProps}>
-            {label}
-          </Text>
-        ) : null}
+        {label}
       </Box>
-
-      <HelperText error={!!error} helperText={error || helperText} />
     </>
   );
 };

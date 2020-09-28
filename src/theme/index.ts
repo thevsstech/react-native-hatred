@@ -35,7 +35,7 @@ const theme = createTheme({
       color: 'text',
     },
     label: {
-      fontSize: 14,
+      fontSize: 12,
       lineHeight: 16,
       color: 'label',
     },
@@ -76,57 +76,20 @@ const theme = createTheme({
     },
   },
   buttonVariants: {
-    'filter-dropdown': {
-      alignSelf: 'flex-start',
-      backgroundColor: 'transparent',
-      paddingVertical: 'xs',
-      paddingHorizontal: 'm',
-      justifyContent: 'flex-start',
-      placeholderProps: {
-        color: 'white',
-        textAlign: 'left',
-        numberOfLines: 1,
-        adjustsFontSizeToFit: true,
-        fontSize: 12,
-        marginRight: 'xs',
-      },
-    },
-
-    'datepicker': {
+    datepicker: {
       borderBottomWidth: 1,
       borderColor: 'border',
       width: '100%',
       height: 40,
-      labelProps: {
-        color: 'label',
-        onVisible: {
-          color: 'primary',
-        },
-        onError: {
-          color: 'error',
-        },
-      },
     },
-    'select': {
+    select: {
       borderBottomWidth: 1,
       borderColor: 'border',
       width: '100%',
       height: 40,
-      labelProps: {
-        color: 'label',
-        onVisible: {
-          color: 'primary',
-        },
-        onError: {
-          color: 'error',
-        },
-      },
-      onError: {
-        borderColor: 'error',
-      },
     },
 
-    'dropdown': {
+    dropdown: {
       alignSelf: 'flex-start',
       backgroundColor: 'transparent',
       paddingVertical: 's',
@@ -137,7 +100,7 @@ const theme = createTheme({
       },
     },
 
-    'contained': {
+    contained: {
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
@@ -149,7 +112,7 @@ const theme = createTheme({
         color: 'white',
       },
     },
-    'outlined': {
+    outlined: {
       flex: 1,
       height: 44,
       alignItems: 'center',
@@ -162,7 +125,7 @@ const theme = createTheme({
       },
     },
 
-    'text': {
+    text: {
       alignSelf: 'flex-start',
       padding: 'none',
       margin: 'none',
@@ -177,54 +140,16 @@ const theme = createTheme({
   },
   textInputVariants: {
     primary: {
-      flex: 1,
+      width: '100%',
       height: 44,
-      containerProps: {
-        width: '100%',
-        borderBottomWidth: 1,
-        borderColor: 'border',
-        onFocused: {
-          borderColor: 'primary',
-        },
-        onError: {
-          borderColor: 'error',
-        },
-      },
-      labelProps: {
-        color: 'label',
-        onFocused: {
-          color: 'primary',
-        },
-        onError: {
-          color: 'error',
-        },
-      },
+      borderBottomWidth: 1,
+      borderBottomColor: 'border',
     },
     outlined: {
       height: 40,
-      rootProps: {
-        width: '100%',
-        borderWidth: 1,
-        borderColor: 'border',
-        onFocused: {
-          borderColor: 'primary',
-        },
-        onError: {
-          borderColor: 'error',
-        },
-      },
-      labelProps: {
-        color: 'label',
-        onFocused: {
-          color: 'primary',
-        },
-        onError: {
-          color: 'error',
-        },
-      },
+      borderWidth: 1,
+      borderColor: 'border',
     },
-    success: {},
-    error: {},
   },
   borderRadii: borderRadius,
   spacing: spacing,

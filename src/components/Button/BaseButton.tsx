@@ -32,7 +32,7 @@ export type BaseButtonProps = ViewProps &
   OpacityProps<Theme> &
   LayoutProps<Theme> &
   TouchableOpacityProps & {
-    children?: JSX.Element | Array<JSX.Element>;
+    children?: JSX.Element | Array<JSX.Element> | null;
   };
 
 type Props = BaseButtonProps & {
@@ -52,10 +52,7 @@ const functions = [
 ];
 
 const BaseButton = React.forwardRef<TouchableOpacity, Props>(
-  (
-    { onPress, children, leftIcon, rightIcon, loading, loadingProps, ...rest },
-    ref
-  ) => {
+  ({ onPress, children, leftIcon, rightIcon, ...rest }, ref) => {
     const props = useRestyle(functions, rest);
     return (
       <TouchableOpacity ref={ref} {...props} onPress={onPress}>

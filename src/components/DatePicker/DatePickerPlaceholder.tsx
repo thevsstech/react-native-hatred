@@ -1,10 +1,19 @@
 import type { TextProps } from '../Typography';
 import Placeholder from '../Typography/Placeholder';
 import React from 'react';
-import type { DatePickerPlaceholderCallbackParams } from './DatePicker';
+// placeholder relevant types
+
+interface DatePickerPlaceholderCallbackParams {
+  value: Date;
+  formatted: string;
+}
+
+export type DatePickerPlaceholderCallback = (
+  props: DatePickerPlaceholderCallbackParams
+) => JSX.Element | string;
 
 type Props = TextProps & {
-  children: string | JSX.Element | DatePickerPlaceholderCallbackParams;
+  children: string | JSX.Element | DatePickerPlaceholderCallback;
 };
 
 /*

@@ -223,13 +223,13 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
   let { left, right } = useLeftRight(children, ContentLeft, ContentRight);
   const { Footer, Header, Empty } = useHeaderFooter(
     children,
-    ContentHeader,
-    ContentFooter,
+    ContentHeader as any,
+    ContentFooter as any,
     SelectEmpty
   );
   const selectedIcon = useSelectedIcon<JSX.Element>(
     children,
-    SelectSelectedIcon
+    SelectSelectedIcon as any
   );
 
   return (

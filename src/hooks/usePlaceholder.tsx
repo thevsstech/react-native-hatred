@@ -1,4 +1,4 @@
-import { useMemo, ComponentType } from 'react';
+import React, { useMemo, ComponentType } from 'react';
 import findChildByComponent from '../utils/children';
 
 export default function usePlaceholder(
@@ -15,8 +15,18 @@ export default function usePlaceholder(
 
     let isFunction = typeof component.props?.children === 'function';
 
-    return isFunction ? component.props.children(passObject) : component;
-  }, [children, passObject]);
+    if (isFunction) {
+      let response = component.props.children(passObject);
+
+      if (typeof response === 'string') {
+        return React.cloneElement(component, { children: response });
+      } else {
+        component = response;
+      }
+    }
+
+    return component;
+  }, [Component, children, passObject]);
 
   return placeholder;
 }

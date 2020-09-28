@@ -1,19 +1,52 @@
-import Text from '../Typography/Text';
 import React from 'react';
 import BaseButton, { BaseButtonProps } from './BaseButton';
-import { TextProps, useTheme } from '@shopify/restyle';
+import type { TextProps } from '@shopify/restyle';
 import type { Theme } from '../../theme';
-
+import usePlaceholder from '../../hooks/usePlaceholder';
+import ButtonText from './ButtonText';
+import useLeftRight from '../../hooks/useLeftRight';
+import ContentLeft from '../Content/ContentLeft';
+import ContentRight from '../Content/ContentRight';
+import useLoading from '../../hooks/useLoading';
+import ContentLoading from '../Content/ContentLoading';
+export type ButtonTextCallbackParams = {};
 export type ButtonProps = BaseButtonProps & {
   onPress: () => void;
   labelProps?: TextProps<Theme>;
   disabled?: boolean;
-  children: string;
+  children: JSX.Element | JSX.Element[];
   loading?: boolean;
 };
 
+/**
+ * You can customize your button with variants or directly from props
+ * example usage
+ * <Button>
+ *
+ *  <Button.Text>
+ *    Test
+ *  </Button.Text>
+ *
+ * </Button>
+ *
+ *
+ * @param onPress
+ * @param children
+ * @param disabled
+ * @param rest
+ * @constructor
+ */
 const Button = ({ onPress, children, disabled, ...rest }: ButtonProps) => {
-  const theme = useTheme<Theme>();
+  let text = usePlaceholder(children, ButtonText, {});
+  const loading = useLoading(children);
+  const { left, right } = useLeftRight(
+    children,
+    ContentLeft,
+    ContentRight,
+    undefined,
+    loading
+  );
+
   return (
     <BaseButton
       alignItems={'center'}
@@ -23,17 +56,10 @@ const Button = ({ onPress, children, disabled, ...rest }: ButtonProps) => {
         disabled || rest.loading ? (rest.opacity as number) - 0.2 : rest.opacity
       }
       onPress={(disabled || rest.loading ? null : onPress) as any}
+      rightIcon={right}
+      leftIcon={left}
     >
-      {children ? (
-        <Text
-          letterSpacing={1}
-          fontSize={13}
-          marginHorizontal={'s'}
-          {...labelProps}
-        >
-          {children}
-        </Text>
-      ) : null}
+      {text}
     </BaseButton>
   );
 };
@@ -41,6 +67,13 @@ const Button = ({ onPress, children, disabled, ...rest }: ButtonProps) => {
 Button.defaultProps = ({
   variant: 'primary',
   opacity: 1,
+  disabled: false,
+  loading: false,
 } as unknown) as ButtonProps;
 
-export default React.memo(Button);
+Button.Text = ButtonText;
+Button.Right = ContentRight;
+Button.Left = ContentLeft;
+Button.Loading = ContentLoading;
+
+export default Button;

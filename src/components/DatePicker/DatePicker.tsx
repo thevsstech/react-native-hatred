@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Platform, Modal } from 'react-native';
 import BaseButton, { BaseButtonProps } from '../Button/BaseButton';
 import moment from 'moment';
@@ -7,18 +7,15 @@ import DateTimePicker, {
   IOSNativeProps,
 } from '@react-native-community/datetimepicker';
 import Box from '../Box';
-import Button from '../Button/BaseButton';
+import Button from '../Button/Button';
 import usePlaceholder from '../../hooks/usePlaceholder';
 import DatePickerPlaceholder from './DatePickerPlaceholder';
 import useHeaderFooter from '../../hooks/useHeaderFooter';
 import ContentHeader from '../Content/ContentHeader';
 import ContentFooter from '../Content/ContentFooter';
-
-// placeholder relevant types
-export type DatePickerPlaceholderCallbackParams = {
-  value: Date;
-  formatted: string;
-};
+import ContentRight from '../Content/ContentRight';
+import ContentLeft from '../Content/ContentLeft';
+import useLeftRight from '../../hooks/useLeftRight';
 
 type Props = BaseButtonProps & {
   value: Date;
@@ -37,6 +34,8 @@ type ModalProps = {
   pickerProps?: Omit<IOSNativeProps & AndroidNativeProps, 'value'>;
   visible: boolean;
   toggleVisible: () => void;
+  Header?: JSX.Element;
+  Footer?: JSX.Element;
   onChangeCallback: (event: Record<string, any>, selectedData: Date) => void;
 };
 
@@ -68,6 +67,7 @@ const DatePickerModal = ({
         justifyContent={'center'}
       >
         <Box minWidth={'80%'} backgroundColor={'surface'} padding={'l'}>
+          {Header}
           <DateTimePicker
             testID="dateTimePicker"
             display="default"
@@ -76,7 +76,7 @@ const DatePickerModal = ({
             value={value}
             onChange={onChangeCallback}
           />
-
+          {Footer}
           <Box
             alignItems={'center'}
             justifyContent={'flex-end'}
@@ -87,14 +87,13 @@ const DatePickerModal = ({
                 onChangeCallback({}, oldValue);
                 toggleVisible();
               }}
-              labelProps={{ color: 'text' }}
               variant={'text'}
             >
-              {cancelText}
+              <Button.Text>{cancelText || 'Cancel'}</Button.Text>
             </Button>
 
-            <Button onPress={toggleVisible} variant={'primary'}>
-              {confirmText}
+            <Button onPress={toggleVisible} variant={'text'}>
+              <Button.Text>{confirmText || 'Confirm'}</Button.Text>
             </Button>
           </Box>
         </Box>
@@ -120,7 +119,7 @@ const DatePicker = ({
     if (value !== date) {
       setDate(value);
     }
-  }, [value, setDate]);
+  }, [value, date, setDate]);
 
   const toggleVisible = useCallback(() => {
     setVisible((prev) => !prev);
@@ -151,11 +150,21 @@ const DatePicker = ({
   );
 
   const pickerProps = {};
-  const placeholder = usePlaceholder(children, DatePickerPlaceholder);
+  let passObject = useMemo(() => {
+    return { value, formatted: moment(value).format(dateFormat) };
+  }, [value, dateFormat]);
+  const placeholder = usePlaceholder(
+    children,
+    DatePickerPlaceholder,
+    passObject
+  );
+
+  const { left, right } = useLeftRight(children);
+
   const { Header, Footer } = useHeaderFooter(
     children,
-    ContentHeader,
-    ContentFooter
+    ContentHeader as any,
+    ContentFooter as any
   );
   return (
     <>
@@ -163,8 +172,10 @@ const DatePicker = ({
         flexDirection={'row'}
         alignItems={'center'}
         justifyContent={'space-between'}
+        {...rest}
         onPress={toggleVisible}
-        {...props}
+        leftIcon={left}
+        rightIcon={right}
         variant={variant}
       >
         {placeholder}
@@ -198,11 +209,14 @@ const DatePicker = ({
   );
 };
 
+DatePicker.Placeholder = DatePickerPlaceholder;
+DatePicker.Right = ContentRight;
+DatePicker.Left = ContentLeft;
+
 DatePicker.defaultProps = {
   dateFormat: 'DD/MM/YYYY',
   variant: 'datepicker',
   cancelText: 'İptal',
-  rightIcon: { name: 'calendar', size: 15, color: 'label' },
   confirmText: 'Kaydet',
   pickerProps: {
     mode: 'date',

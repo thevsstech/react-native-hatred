@@ -91,8 +91,6 @@ class GradientHelper extends PureComponent<GradientHelperProps> {
     const colors = this._generateColorsArray(this.props);
     const locations = this._generateLocationsArray(this.props);
 
-    console.log(locations);
-
     return (
       <LinearGradient
         {...rest}

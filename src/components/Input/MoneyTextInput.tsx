@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import TextInput, { TextInputProps } from './TextInput';
+import Input, { TextInputProps } from './TextInput';
 import TextInputMask from 'react-native-masked-input';
 
 type Props = TextInputProps & {
@@ -30,7 +30,7 @@ const MoneyTextInput = ({
   );
 
   return (
-    <TextInput
+    <Input
       {...rest}
       renderInput={(props) => {
         return (

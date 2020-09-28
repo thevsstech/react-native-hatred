@@ -1,6 +1,7 @@
 import React, { ComponentType, useMemo } from 'react';
 import findChildByComponent from '../utils/children';
 import Icon from '../components/Icon/Icon';
+// @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function useSelectedIcon<T extends JSX.Element | null>(

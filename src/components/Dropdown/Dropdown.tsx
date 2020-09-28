@@ -44,9 +44,14 @@ const styles = {
   },
 };
 // placeholder relevant types
-export type DropdownPlaceholderCallbackParams = {
+type DropdownPlaceholderCallbackParams = {
   selected: DropdownItemType;
 };
+
+export type DropdownPlaceholderCallback = (
+  args: DropdownPlaceholderCallbackParams
+) => JSX.Element | string;
+
 export type DropDownPositionType = 'top' | 'bottom';
 export type OnDropdownSelect = (item: DropdownItemType) => void;
 
@@ -72,6 +77,7 @@ type ModalProps = {
   Empty?: JSX.Element;
   selectedIcon: JSX.Element | null;
   height: number;
+  value: string | number;
 };
 
 const DropDownModal = ({
@@ -85,6 +91,7 @@ const DropDownModal = ({
   Header,
   Footer,
   Empty,
+  value,
   onSelect,
   height = 200,
 }: ModalProps) => {
@@ -98,12 +105,13 @@ const DropDownModal = ({
         <DropdownItem
           item={item}
           onSelect={onSelect}
-          selectedIcon={selectedIcon}
+          selected={item.value === value}
+          selectedIcon={selectedIcon || null}
           width={anchorPosition.width}
         />
       );
     },
-    [onSelect, anchorPosition.width, selectedIcon]
+    [onSelect, value, anchorPosition.width, selectedIcon]
   );
 
   const viewStyle = useMemo<ViewStyle>(() => {
@@ -201,9 +209,9 @@ const Dropdown = ({
   const placeholder = usePlaceholder(children, DropdownPlaceholder, value);
   const { Header, Footer, Empty } = useHeaderFooter(
     children,
-    ContentHeader,
-    ContentFooter,
-    ContentEmpty
+    ContentHeader as any,
+    ContentFooter as any,
+    ContentEmpty as any
   );
   const selectedIcon = useSelectedIcon<JSX.Element | null>(
     children,
@@ -231,6 +239,7 @@ const Dropdown = ({
         Header={Header}
         Footer={Footer}
         Empty={Empty}
+        value={value}
         backdropColor={backdropColor}
         selectedIcon={selectedIcon}
         items={items}
