@@ -21,7 +21,7 @@ const AvatarContainer = ({
   const theme = useTheme<Theme>();
   size = size * sizeMultiply;
 
-  backgroundColor = (theme.colors[backgroundColor as string] ||
+  backgroundColor = (theme.colors[backgroundColor as keyof Theme['colors']] ||
     backgroundColor) as string;
 
   return (

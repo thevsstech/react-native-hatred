@@ -1,5 +1,6 @@
 import React from 'react';
-import Text, { TextProps } from './Typography/Text';
+import type { TextProps } from './Typography/Text';
+import Caption from './Typography/Caption';
 
 export type HelperTextProps = TextProps & {
   error?: boolean;
@@ -8,14 +9,14 @@ export type HelperTextProps = TextProps & {
 
 const HelperText = ({ error, children, ...rest }: HelperTextProps) => {
   return (
-    <Text
+    <Caption
       variant={'helperText'}
       alpha={0.87}
       color={error ? 'error' : 'text'}
       {...rest}
     >
       {children}
-    </Text>
+    </Caption>
   );
 };
 

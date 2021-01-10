@@ -1,7 +1,5 @@
 import React from 'react';
 import BaseButton, { BaseButtonProps } from './BaseButton';
-import type { TextProps } from '@shopify/restyle';
-import type { Theme } from '../../theme';
 import usePlaceholder from '../../hooks/usePlaceholder';
 import ButtonText from './ButtonText';
 import useLeftRight from '../../hooks/useLeftRight';
@@ -12,7 +10,6 @@ import ContentLoading from '../Content/ContentLoading';
 export type ButtonTextCallbackParams = {};
 export type ButtonProps = BaseButtonProps & {
   onPress: () => void;
-  labelProps?: TextProps<Theme>;
   disabled?: boolean;
   children: JSX.Element | JSX.Element[];
   loading?: boolean;

@@ -1,6 +1,5 @@
 import React, { ReactText } from 'react';
 import {
-  StyleSheet,
   TouchableOpacity,
   View,
   ImageProps as NativeImageProps,
@@ -8,7 +7,18 @@ import {
   NativeSyntheticEvent,
   ImageErrorEventData,
   ImageLoadEventData,
+  StyleSheet,
+  ViewStyle,
 } from 'react-native';
+
+const styles = {
+  placeholderContainer: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 99999,
+  },
+};
 
 type RenderImageStatusType = 'loading' | 'error' | null;
 export type ImageProps = NativeImageProps & {
@@ -65,24 +75,22 @@ const Image = ({
 
   let status = loading ? 'loading' : error ? 'error' : null;
 
+  const shouldHavePlaceholder = placeholder || renderPlaceholder;
   return (
     <TouchableComponent onPress={onPress}>
-      {(placeholder || renderPlaceholder) && loading ? (
-        <View
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 99999,
-          }}
-        >
+      {shouldHavePlaceholder && loading ? (
+        <View style={styles.placeholderContainer as ViewStyle}>
           {placeholder ? placeholder : null}
           {renderPlaceholder
             ? renderPlaceholder(width, height, status as RenderImageStatusType)
             : null}
         </View>
       ) : null}
-      <Image {...rest} onLoad={onLoadCallback} onError={onErrorCallback} />
+      <Image
+        {...rest}
+        onLoad={shouldHavePlaceholder ? onLoadCallback : undefined}
+        onError={shouldHavePlaceholder ? onErrorCallback : undefined}
+      />
     </TouchableComponent>
   );
 };

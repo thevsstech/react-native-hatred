@@ -1,33 +1,34 @@
+import type { TextProps } from '../Typography';
 import React from 'react';
-import HelperText, { HelperTextProps } from '../HelperText';
+import Label from '../Typography/Label';
 
-export interface InputLabelCallbackProps {
+interface SelectLabelCallbackProps {
   focused?: boolean;
   error?: string;
 }
 
-type InputLabelCallback = (
-  props: InputLabelCallbackProps
+type SelectLabelCallback = (
+  props: SelectLabelCallbackProps
 ) => JSX.Element | string;
 
-type Props = HelperTextProps & {
-  children: string | JSX.Element | InputLabelCallback;
+type Props = TextProps & {
+  children: string | JSX.Element | SelectLabelCallback;
 };
 
 /*
    Example usage formats
 
    // with a static string
-   <Input.HelperText>
-     put your static helpertext here
-   </Input.HelperText>
+   <Input.Label>
+     put your static placeholder here
+   </Input.Label>
 
    // a custom JSX element
-    <Input.HelperText>
+    <Input.Label>
       <View>
           <Text>your label</Text>
       </>
-    </Input.HelperText>
+    </Input.Label>
 
 
    // with a  function
@@ -35,24 +36,20 @@ type Props = HelperTextProps & {
    // {  focused: false, error: '' }
    // also if you have enabled multiple options selected option will be an array
 
-   <Input.HelperText>
+   <Input.Label>
     {( {focused} ) => <View>
         <Text>{focused ? 'Test' : 'test'}
    </View> }
-   </Input.HelperText>
+   </Input.Label>
   */
-export default function InputHelperText({ children, ...rest }: Props) {
+export default function SelectLabel({ children, ...rest }: Props) {
   // if we have a string content, return a Placeholder
 
   if (typeof children === 'string') {
-    return (
-      <HelperText marginTop={'xs'} {...rest}>
-        {children}
-      </HelperText>
-    );
+    return <Label {...rest}>{children}</Label>;
   }
 
   return children;
 }
 
-InputHelperText.displayName = 'Input.HelperText';
+SelectLabel.displayName = 'Select.Label';

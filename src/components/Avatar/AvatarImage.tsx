@@ -16,7 +16,11 @@ type Props = AvatarContainerProps &
  *
  *
  * @param size
+ * @param backgroundColor
+ * @param containerStyle
+ * @param sizeMultiply
  * @param onPress
+ * @param style
  * @param rest
  * @constructor
  */

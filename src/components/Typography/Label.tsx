@@ -1,11 +1,11 @@
 import React from 'react';
 import Text, { TextProps } from './Text';
 
-const Label = (props: TextProps) => {
+const Label = ({ children, ...rest }: TextProps) => {
   return (
-    <Text alpha={0.87} variant={'label'}>
+    <Text alpha={0.87} variant={'label'} {...rest}>
       {' '}
-      {props.children}
+      {children}
     </Text>
   );
 };

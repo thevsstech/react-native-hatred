@@ -1,7 +1,16 @@
 import type { TextProps } from '../Typography';
-import type { SelectPlaceholderCallback } from './Select';
 import Placeholder from '../Typography/Placeholder';
 import React from 'react';
+import type { SelectItemType } from './Select';
+
+// placeholder relevant types
+type SelectPlaceholderCallbackParams = {
+  selected: SelectItemType | SelectItemType[];
+};
+
+export type SelectPlaceholderCallback = (
+  params: SelectPlaceholderCallbackParams
+) => JSX.Element;
 
 type Props = TextProps & {
   children: string | JSX.Element | SelectPlaceholderCallback;

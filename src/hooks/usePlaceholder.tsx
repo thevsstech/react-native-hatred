@@ -4,7 +4,7 @@ import findChildByComponent from '../utils/children';
 export default function usePlaceholder(
   children: JSX.Element | JSX.Element[],
   Component: ComponentType<any>,
-  passObject: any
+  passObject: any = {}
 ) {
   const placeholder = useMemo(() => {
     let component = findChildByComponent(children, Component);

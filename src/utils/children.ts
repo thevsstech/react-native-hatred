@@ -8,7 +8,17 @@ export default function findChildByComponent(
     children = [children];
   }
 
-  return children.find((item) => item.type === Component);
+  return children.find((item) => {
+    if (!item) {
+      return false;
+    }
+
+    if (typeof item.type === 'undefined') {
+      return false;
+    }
+
+    return item.type === Component;
+  });
 }
 
 export function findChildByDisplayName(
@@ -20,6 +30,14 @@ export function findChildByDisplayName(
   }
 
   return children.find((item) => {
+    if (!item) {
+      return false;
+    }
+
+    if (typeof item.type === 'undefined') {
+      return false;
+    }
+
     return item.type.displayName === displayName;
   });
 }

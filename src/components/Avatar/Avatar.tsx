@@ -5,5 +5,5 @@ import AvatarText from './AvatarText';
 export default {
   Icon: AvatarIcon,
   Image: AvatarImage,
-  Text: AvatarText
-}
+  Text: AvatarText,
+};

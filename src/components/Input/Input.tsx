@@ -7,12 +7,11 @@ import usePlaceholder from '../../hooks/usePlaceholder';
 import InputLabel from './InputLabel';
 import InputHelperText from './InputHelperText';
 type BaseProps = BaseTextInputProps & {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
   error?: string;
 };
 
-export type TextInputProps = BaseTextInputProps &
-  VariantProps<Theme, 'textInputVariants'> &
+export type TextInputProps = VariantProps<Theme, 'textInputVariants'> &
   BaseProps;
 
 const Input = ({ children, ...rest }: TextInputProps) => {
@@ -39,6 +38,8 @@ const Input = ({ children, ...rest }: TextInputProps) => {
     },
     [rest.onBlur]
   );
+
+  children = children || [];
 
   const passObject = useMemo(() => ({ focused, error: rest.error }), [
     focused,

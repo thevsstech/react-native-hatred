@@ -47,7 +47,7 @@ const theme = createTheme({
     subtitle: {
       fontSize: 16,
       lineHeight: 24,
-      marginVertical: 2,
+      marginVertical: 'xxs',
       letterSpacing: 0.5,
     },
     title: {
@@ -59,19 +59,18 @@ const theme = createTheme({
     paragraph: {
       fontSize: 14,
       lineHeight: 20,
-      marginVertical: 2,
+      marginVertical: 'xxs',
       letterSpacing: 0.25,
     },
     headline: {
       fontSize: 24,
       lineHeight: 32,
-      marginVertical: 2,
+      marginVertical: 'xxs',
       letterSpacing: 0,
     },
     caption: {
       fontSize: 12,
       lineHeight: 20,
-      marginVertical: 2,
       letterSpacing: 0.4,
     },
   },
@@ -94,10 +93,6 @@ const theme = createTheme({
       backgroundColor: 'transparent',
       paddingVertical: 's',
       paddingHorizontal: 'm',
-      placeholderProps: {
-        color: 'placeholder',
-        marginRight: 'xs',
-      },
     },
 
     contained: {
@@ -108,9 +103,6 @@ const theme = createTheme({
       elevation: 6,
       borderRadius: 'l',
       backgroundColor: 'primary',
-      labelProps: {
-        color: 'white',
-      },
     },
     outlined: {
       flex: 1,
@@ -120,9 +112,6 @@ const theme = createTheme({
       backgroundColor: 'transparent',
       borderWidth: 1,
       borderColor: 'primary',
-      labelProps: {
-        color: 'primary',
-      },
     },
 
     text: {
@@ -133,9 +122,6 @@ const theme = createTheme({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'transparent',
-      labelProps: {
-        color: 'primary',
-      },
     },
   },
   textInputVariants: {

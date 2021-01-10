@@ -1,8 +1,15 @@
 import type { TextProps } from '../Typography';
 import Placeholder from '../Typography/Placeholder';
 import React from 'react';
-import type { DropdownPlaceholderCallback } from './Dropdown';
+import type { DropdownItemType } from './Dropdown';
+// placeholder relevant types
+type DropdownPlaceholderCallbackParams = {
+  selected: DropdownItemType;
+};
 
+export type DropdownPlaceholderCallback = (
+  args: DropdownPlaceholderCallbackParams
+) => JSX.Element | string;
 type Props = TextProps & {
   children: string | JSX.Element | DropdownPlaceholderCallback;
 };

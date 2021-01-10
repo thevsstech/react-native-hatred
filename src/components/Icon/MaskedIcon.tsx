@@ -12,6 +12,12 @@ type Props = {
   icon: JSX.Element;
 };
 
+const styles = {
+  width: size,
+  height: size,
+  borderRadius: 0,
+};
+
 export default function MaskedIcon({
   maskGradient,
   maskGradientVariant,
@@ -33,11 +39,7 @@ export default function MaskedIcon({
       <BaseGradient
         variant={maskGradientVariant}
         {...maskGradient}
-        style={{
-          width: size,
-          height: size,
-          borderRadius: 0,
-        }}
+        style={styles}
       />
     </MaskedView>
   );

@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import Text from '../Typography/Text';
 import React from 'react';
 import type { DropdownItemType, OnDropdownSelect } from './Dropdown';
-import ContentIcon, { IconType } from '../Icon/ContentIcon';
+import type { IconType } from '../Icon/ContentIcon';
 import useRtl from '../../hooks/useRtl';
 
 type Props = {
