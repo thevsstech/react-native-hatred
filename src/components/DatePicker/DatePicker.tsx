@@ -73,8 +73,8 @@ const DatePickerModal = ({
             display="default"
             is24Hour
             {...pickerProps}
-            value={value}
-            onChange={onChangeCallback}
+            value={value || new Date()}
+            onChange={onChangeCallback as any}
           />
           {Footer}
           <Box

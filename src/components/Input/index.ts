@@ -1,2 +1,1 @@
-export * from './TextInput';
-export * from './MoneyTextInput';
+export * from './Input';
