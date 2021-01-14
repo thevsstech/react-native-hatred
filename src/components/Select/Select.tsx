@@ -68,12 +68,24 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
   }, [value]);
 
   const selectedItems = useMemo(() => {
-    return selectedValues.map((value) => {
-      return items.find((item) => item.value === value);
-    });
+    if (!selectedValues.length) {
+      return null;
+    }
+
+    const selected = selectedValues
+      .map((value) => {
+        return items.find((item: SelectItemType) => item.value === value);
+      })
+      .filter((item) => !!item);
+
+    if (selected.length === 0) {
+      return null;
+    }
+
+    return items;
   }, [selectedValues, items]);
 
-  const label = usePlaceholder(children, SelectLabel);
+  const label = usePlaceholder(children, SelectLabel, selectedItems);
   let placeholder = usePlaceholder(children, SelectPlaceholder, selectedItems);
   let { left, right } = useLeftRight(children, ContentLeft, ContentRight);
   const { Footer, Header, Empty } = useHeaderFooter(
@@ -82,8 +94,6 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
     ContentFooter as any,
     SelectEmpty
   );
-
-  console.log(selectedItems);
 
   const selectedIcon = useSelectedIcon<JSX.Element>(
     children,

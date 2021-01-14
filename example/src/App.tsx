@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useCallback, useState } from 'react';
 import ThemeProvider from '../../src/components/ThemeProvider';
 import Box from '../../src/components/Box';
-import Dropdown from '../../src/components/Dropdown/Dropdown';
+import { Select } from 'react-native-hatred';
 
 export default function App() {
   let [value, setValue] = useState('');
@@ -27,8 +27,8 @@ export default function App() {
       }}
       isRtl={false}
     >
-      <Box flex={1} margin={'xxxl'} justifyContent={'flex-end'}>
-        <Dropdown
+      <Box flex={1} margin={'xxxl'}>
+        <Select
           items={[
             {
               label: 'asdasd',
@@ -36,10 +36,10 @@ export default function App() {
             },
           ]}
           onSelect={onChange}
-          value={value}
+          value={'asdasd'}
         >
-          <Dropdown.Placeholder>asdasd</Dropdown.Placeholder>
-        </Dropdown>
+          <Select.Placeholder>sdfsdf</Select.Placeholder>
+        </Select>
       </Box>
     </ThemeProvider>
   );

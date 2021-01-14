@@ -1,7 +1,7 @@
 import type { TextProps } from '../Typography';
 import React from 'react';
 import Text from '../Typography/Text';
-import type { ButtonTextCallbackParams } from 'react-native-hatred';
+import type { ButtonTextCallbackParams } from './Button';
 
 type Props = TextProps & {
   children: string | JSX.Element | ButtonTextCallbackParams;

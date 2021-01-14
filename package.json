@@ -1,6 +1,6 @@
 {
   "name": "react-native-hatred",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "React Native UI Library will help you to reduce your hatred towards react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
