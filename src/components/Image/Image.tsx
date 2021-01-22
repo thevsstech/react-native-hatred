@@ -4,6 +4,7 @@ import {
   View,
   ImageProps as NativeImageProps,
   ImageStyle,
+  Image as NativeImage,
   NativeSyntheticEvent,
   ImageErrorEventData,
   ImageLoadEventData,
@@ -86,7 +87,7 @@ const Image = ({
             : null}
         </View>
       ) : null}
-      <Image
+      <NativeImage
         {...rest}
         onLoad={shouldHavePlaceholder ? onLoadCallback : undefined}
         onError={shouldHavePlaceholder ? onErrorCallback : undefined}
