@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Box from '../Box';
 import { spacing as margin } from '../../theme/spacing';
-import type { OnSelect, SelectItemType } from './Select';
+import type { OnSelect, SelectItemType, SelectRenderItemType } from './Select';
 type Value = Array<string | number>;
 
 type ModalProps = {
@@ -21,7 +21,7 @@ type ModalProps = {
   Footer?: JSX.Element;
   EmptyComponent?: JSX.Element;
   value: Value;
-  renderItem?: ListRenderItem<any>;
+  renderItem?: SelectRenderItemType;
 };
 
 const styles = {
@@ -67,10 +67,13 @@ const SelectModal = ({
   EmptyComponent,
   selectedIcon,
 }: ModalProps) => {
-  const renderItemCallback = useCallback(
+  const renderItemCallback = useCallback<ListRenderItem<SelectItemType>>(
     ({ item, index }) => {
       const selected = isSelected(value, item.value);
 
+      if (renderItem) {
+        return renderItem({ item, index, selected, onSelect, selectedIcon });
+      }
       return (
         <SelectItem
           onSelect={onSelect}
@@ -81,7 +84,7 @@ const SelectModal = ({
         />
       );
     },
-    [onSelect, selectedIcon, value]
+    [onSelect, selectedIcon, value, renderItem]
   );
 
   return (
@@ -113,7 +116,7 @@ const SelectModal = ({
             width={'85%'}
           >
             {visible ? (
-              <FlatList
+              <FlatList<SelectItemType>
                 data={items || []}
                 style={styles.flatList}
                 initialNumToRender={7}
@@ -126,7 +129,7 @@ const SelectModal = ({
                     ? item.value.toString()
                     : item.value
                 }
-                renderItem={renderItem || renderItemCallback}
+                renderItem={renderItemCallback}
               />
             ) : null}
           </Box>

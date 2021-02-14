@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native';
 import Card, { CardProps } from '../Card/Card';
-import Text from '../Typography/Text';
+import Text, { TextProps } from '../Typography/Text';
 import React from 'react';
 import type { OnSelect, SelectItemType } from './Select';
 import type { IconType } from '../Icon/ContentIcon';
@@ -12,6 +12,7 @@ type Props = CardProps & {
   item: SelectItemType;
   index: number;
   selected: boolean;
+  textProps?: TextProps;
   selectedIcon: IconType;
 };
 
@@ -21,6 +22,7 @@ export default function SelectItem({
   index,
   selected,
   selectedIcon,
+  textProps = {},
   ...rest
 }: Props) {
   let { left, right } = useRtl(
@@ -43,7 +45,9 @@ export default function SelectItem({
       >
         <Box flexDirection={'row'} alignItems={'center'} flex={1}>
           {left}
-          <Text marginLeft={left ? 'xs' : 'none'}>{item.label}</Text>
+          <Text marginLeft={left ? 'xs' : 'none'} {...textProps}>
+            {item.label}
+          </Text>
         </Box>
 
         {right}

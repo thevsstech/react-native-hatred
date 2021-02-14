@@ -34,9 +34,21 @@ export default function App() {
               label: 'asdasd',
               value: 1,
             },
+            {
+              label: 'dddd',
+              value: 2,
+            },
           ]}
+          renderItem={({ selected, item, index, onSelect, selectedIcon }) => (
+            <Select.Item
+              {...{ selectedIcon, selected, item, index, onSelect }}
+              textProps={{
+                color: 'error',
+              }}
+            />
+          )}
           onSelect={onChange}
-          value={'asdasd'}
+          value={value}
         >
           <Select.Placeholder>sdfsdf</Select.Placeholder>
         </Select>

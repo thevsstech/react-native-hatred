@@ -16,6 +16,7 @@ import ContentRight from '../Content/ContentRight';
 import ContentLeft from '../Content/ContentLeft';
 import SelectModal from './SelectModal';
 import SelectLabel from './SelectLabel';
+import SelectItem from './SelectItem';
 
 export type SelectItemType = {
   label: string;
@@ -24,6 +25,7 @@ export type SelectItemType = {
   rightIcon?: IconType;
   originalItem?: any;
 };
+
 type Value = Array<string | number>;
 
 export type OnSelect = (
@@ -32,15 +34,33 @@ export type OnSelect = (
   index: number
 ) => void;
 
+export type SelectRenderItemType = (data: {
+  selected: boolean;
+  item: SelectItemType;
+  index: number;
+  selectedIcon: any;
+  onSelect: OnSelect;
+}) => React.ReactElement | null;
+
 export type SelectProps = BaseButtonProps & {
   items: Array<SelectItemType>;
   onSelect: Function;
   placeholder?: string;
+  multiple?: boolean;
   value: string | number | Value;
   children: JSX.Element | JSX.Element[];
+  renderItem?: SelectRenderItemType;
 };
 
-const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
+const Select = ({
+  items,
+  onSelect,
+  value,
+  renderItem,
+  children,
+  multiple = false,
+  ...rest
+}: SelectProps) => {
   const [visible, setVisible] = useState(false);
 
   const onDismiss = useCallback(() => {
@@ -71,7 +91,6 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
     if (!selectedValues.length) {
       return null;
     }
-
     const selected = selectedValues
       .map((value) => {
         return items.find((item: SelectItemType) => item.value === value);
@@ -82,8 +101,8 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
       return null;
     }
 
-    return items;
-  }, [selectedValues, items]);
+    return multiple ? selected : selected[0];
+  }, [selectedValues, multiple, items]);
 
   const label = usePlaceholder(children, SelectLabel, selectedItems);
   let placeholder = usePlaceholder(children, SelectPlaceholder, selectedItems);
@@ -123,6 +142,7 @@ const Select = ({ items, onSelect, value, children, ...rest }: SelectProps) => {
         Header={Header}
         EmptyComponent={Empty}
         value={selectedValues}
+        renderItem={renderItem}
         selectedIcon={selectedIcon}
         onSelect={onSelectCallback}
         onDismiss={onDismiss}
@@ -137,7 +157,7 @@ Select.defaultProps = {
 };
 
 Select.Label = SelectLabel;
-Select.Item = SelectModal;
+Select.Item = SelectItem;
 Select.Placeholder = SelectPlaceholder;
 Select.Header = ContentHeader;
 Select.Footer = ContentFooter;
