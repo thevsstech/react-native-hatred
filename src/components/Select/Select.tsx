@@ -71,14 +71,6 @@ const Select = ({
     setVisible(true);
   }, []);
 
-  const onSelectCallback = useCallback(
-    (value, item, index) => {
-      onSelect(value, item, index);
-      onDismiss();
-    },
-    [onSelect, onDismiss]
-  );
-
   const selectedValues = useMemo<any[]>(() => {
     if (!value) {
       return [];
@@ -86,6 +78,26 @@ const Select = ({
 
     return Array.isArray(value) ? value : [value];
   }, [value]);
+
+  const onSelectCallback = useCallback(
+    (value, item, index) => {
+      if (!multiple) {
+        onSelect(value, item, index);
+      } else {
+        const valueExists = selectedValues.find((i) => i === value);
+
+        onSelect(
+          valueExists
+            ? selectedValues.filter((i) => i !== value)
+            : [...selectedValues, value],
+          item,
+          index
+        );
+      }
+      onDismiss();
+    },
+    [onSelect, onDismiss, multiple, selectedValues]
+  );
 
   const selectedItems = useMemo(() => {
     if (!selectedValues.length) {

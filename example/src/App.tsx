@@ -29,6 +29,7 @@ export default function App() {
     >
       <Box flex={1} margin={'xxxl'}>
         <Select
+          multiple
           items={[
             {
               label: 'asdasd',
