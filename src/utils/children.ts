@@ -1,9 +1,12 @@
 import type { ComponentType } from 'react';
+import type React from 'react';
+
+export type FindChildResponse = React.ReactElement | undefined;
 
 export default function findChildByComponent(
-  children: JSX.Element | JSX.Element[],
+  children: React.ReactElement | React.ReactElement[],
   Component: ComponentType<any>
-) {
+): FindChildResponse {
   if (!Array.isArray(children)) {
     children = [children];
   }

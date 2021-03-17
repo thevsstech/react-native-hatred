@@ -52,6 +52,10 @@ export type SelectProps = BaseButtonProps & {
   renderItem?: SelectRenderItemType;
 };
 
+export type SelectRefType = {
+  onDismiss: () => void;
+};
+
 const Select = ({
   items,
   onSelect,
@@ -123,7 +127,8 @@ const Select = ({
     children,
     ContentHeader as any,
     ContentFooter as any,
-    SelectEmpty
+    SelectEmpty,
+    { onDismiss }
   );
 
   const selectedIcon = useSelectedIcon<JSX.Element>(
@@ -165,7 +170,6 @@ const Select = ({
 
 Select.defaultProps = {
   variant: 'select',
-  placeholderProps: {},
 };
 
 Select.Label = SelectLabel;

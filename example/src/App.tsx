@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import ThemeProvider from '../../src/components/ThemeProvider';
 import Box from '../../src/components/Box';
 import { Select } from 'react-native-hatred';
+import { TouchableOpacity, Text } from 'react-native';
 
 export default function App() {
   let [value, setValue] = useState('');
@@ -14,6 +15,7 @@ export default function App() {
 
   console.log(value);
 
+  // @ts-ignore
   return (
     <ThemeProvider
       theme={{
@@ -52,6 +54,15 @@ export default function App() {
           value={value}
         >
           <Select.Placeholder>sdfsdf</Select.Placeholder>
+
+          {/* @ts-ignore */}
+          <Select.Header>
+            {({ onDismiss }) => (
+              <TouchableOpacity onPress={onDismiss}>
+                <Text>Close</Text>
+              </TouchableOpacity>
+            )}
+          </Select.Header>
         </Select>
       </Box>
     </ThemeProvider>
