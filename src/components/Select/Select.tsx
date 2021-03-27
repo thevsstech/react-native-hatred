@@ -84,21 +84,26 @@ const Select = ({
   }, [value]);
 
   const onSelectCallback = useCallback(
-    (value, item, index) => {
+    (v, item, index) => {
       if (!multiple) {
-        onSelect(value, item, index);
+        if (v === value) {
+          onSelect(null, null, null);
+        } else {
+          onSelect(v, item, item);
+        }
+
+        onDismiss();
       } else {
-        const valueExists = selectedValues.find((i) => i === value);
+        const valueExists = selectedValues.find((i) => i === v);
 
         onSelect(
           valueExists
-            ? selectedValues.filter((i) => i !== value)
-            : [...selectedValues, value],
+            ? selectedValues.filter((i) => i !== v)
+            : [...selectedValues, v],
           item,
           index
         );
       }
-      onDismiss();
     },
     [onSelect, onDismiss, multiple, selectedValues]
   );

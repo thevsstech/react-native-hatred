@@ -90,4 +90,4 @@ Menu.Header = ContentHeader;
 Menu.Footer = ContentFooter;
 Menu.Anchor = MenuAnchor;
 
-export default React.memo(Menu);
+export default Menu;
