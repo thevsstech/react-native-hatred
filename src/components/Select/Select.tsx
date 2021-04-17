@@ -116,7 +116,7 @@ const Select = ({
       .map((value) => {
         return items.find((item: SelectItemType) => item.value === value);
       })
-      .filter((item) => !!item);
+      .filter((item) => typeof item !== 'undefined' && item !== null);
 
     if (selected.length === 0) {
       return null;
