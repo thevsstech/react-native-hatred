@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useCallback, useState } from 'react';
 import ThemeProvider from '../../src/components/ThemeProvider';
 import Box from '../../src/components/Box';
-import {  Select } from 'react-native-hatred';
+import { Select } from 'react-native-hatred';
 import { TouchableOpacity, Text } from 'react-native';
 
 export default function App() {
@@ -54,9 +54,7 @@ export default function App() {
           value={value}
         >
           {/* @ts-ignore */}
-          <Select.Placeholder>
-            sss
-          </Select.Placeholder>
+          <Select.Placeholder>sss</Select.Placeholder>
 
           {/* @ts-ignore */}
           <Select.Header>
