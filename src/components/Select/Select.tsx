@@ -126,7 +126,10 @@ const Select = ({
   }, [selectedValues, multiple, items]);
 
   const label = usePlaceholder(children, SelectLabel, selectedItems);
-  let placeholder = usePlaceholder(children, SelectPlaceholder, selectedItems);
+  let placeholder = usePlaceholder(children, SelectPlaceholder, {
+    selected: selectedItems,
+    onPress: openSelect,
+  });
   let { left, right } = useLeftRight(children, ContentLeft, ContentRight);
   const { Footer, Header, Empty } = useHeaderFooter(
     children,

@@ -4,8 +4,9 @@ import React from 'react';
 import type { SelectItemType } from './Select';
 
 // placeholder relevant types
-type SelectPlaceholderCallbackParams = {
+export type SelectPlaceholderCallbackParams = {
   selected: SelectItemType | SelectItemType[];
+  onPress?: () => void;
 };
 
 export type SelectPlaceholderCallback = (
