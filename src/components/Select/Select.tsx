@@ -76,7 +76,7 @@ const Select = ({
   }, []);
 
   const selectedValues = useMemo<any[]>(() => {
-    if (!value) {
+    if (typeof value === 'undefined' || value === null) {
       return [];
     }
 
